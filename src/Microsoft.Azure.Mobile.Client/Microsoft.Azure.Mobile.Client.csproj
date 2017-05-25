@@ -1,8 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--<?xml version="1.0" encoding="utf-8"?>-->
 
+
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Microsoft.Azure.Mobile.Client.Build.props" />
+
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;netstandard1.1;net45;MonoAndroid44;Xamarin.iOS10;uap10.0</TargetFrameworks>
+    <TargetFrameworks>
+		netstandard1.4;netstandard1.1;net45;MonoAndroid44;Xamarin.iOS10;uap10.0
+	</TargetFrameworks>
     <DefaultLanguage>en-US</DefaultLanguage>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
     <Version>4.0.1</Version>
@@ -31,23 +36,37 @@
     <!-- This None is here so the conditinonally included files show up in the Solution Explorer -->
     <None Include="**\*.cs;**\*.xml;**\*.axml" Exclude="obj\**\*.*;bin\**\*.*" />
     <None Include="..\External\Xamarin.Auth\src\**\*.cs" Exclude="..\External\Xamarin.Auth\src\Xamarin.Auth\AssemblyInfo.cs" />
-    <Compile Remove="Platforms\**\*.*" />
-    <Compile Remove="Features\**\*.*" />
+		<Compile Remove="Platforms\**\*.*" />
+    	<Compile Remove="Features\**\*.*" />
+
     <EmbeddedResource Include="Properties\*.rd.xml" />
-    <Compile Update="Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
-    <EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
+
+	<Compile Update="Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
+
+	<!--<Compile DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />-->
+
+	<EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
+
+	<!--<EmbeddedResource Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />-->
   </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>04fc5444-1240-41d7-9aa8-648b9a465c9d</ProjectGuid>
+  </PropertyGroup>
 
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'MonoAndroid44' ">
-    <DefineConstants>$(DefineConstants);PLATFORM_ANDROID;XAMARIN_AUTH_INTERNAL</DefineConstants>
+	<!--<TargetFrameworkIdentifier>MonoAndroid</TargetFrameworkIdentifier>
+	<TargetFrameworkVersion>v4.4</TargetFrameworkVersion>-->
+	<TargetFrameworkIdentifier>MonoDroid</TargetFrameworkIdentifier>
+	<MonoDroidVersion>v1.0</MonoDroidVersion>
+	<TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <DefineConstants>$(DefineConstants);PLATFORM_ANDROID;XAMARIN_AUTH_INTERNAL;__XAMARIN_ANDROID_v1_0__;__MOBILE__;__ANDROID__;__ANDROID_1__;__ANDROID_2__;__ANDROID_3__;__ANDROID_4__;__ANDROID_5__;__ANDROID_6__;__ANDROID_7__;__ANDROID_8__;__ANDROID_9__;__ANDROID_10__;__ANDROID_11__;__ANDROID_12__;__ANDROID_13__;__ANDROID_14__;__ANDROID_15__;__ANDROID_16__;__ANDROID_17__;__ANDROID_18__;__ANDROID_19__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'Xamarin.iOS10' ">
     <DefineConstants>$(DefineConstants);PLATFORM_IOS;XAMARIN_AUTH_INTERNAL</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Loqu8|net45|AnyCPU'" />
-  
-  
+
   <ItemGroup>
     <PackageReference Include="MSBuild.Sdk.Extras" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
@@ -64,7 +83,7 @@
     <Reference Include="System.Net.Http" />
     <Compile Include="Platforms\net45\**\*.cs" />
   </ItemGroup>
-  
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'MonoAndroid44' ">
     <Compile Include="..\External\Xamarin.Auth\src\Xamarin.Auth\**\*.cs" Exclude="..\External\Xamarin.Auth\src\Xamarin.Auth\AssemblyInfo.cs" />
     <Compile Include="..\External\Xamarin.Auth\src\Xamarin.Auth.Android\**\*.cs" />
@@ -76,6 +95,6 @@
     <Compile Include="..\External\Xamarin.Auth\src\Xamarin.Auth.iOS\**\*.cs" />
     <Compile Include="Platforms\ios\**\*.cs" />
   </ItemGroup>
-
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <!--<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />-->
 </Project>

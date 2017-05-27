@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="..\..\build\Microsoft.Azure.Mobile.Client.Build.props" />
-
   <PropertyGroup>
     <TargetFrameworks>
-		netstandard1.4;netstandard1.1;net45
+		netstandard1.3
 	</TargetFrameworks>
     <DefaultLanguage>en-US</DefaultLanguage>
     <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
@@ -11,7 +10,7 @@
     <PackageTitle>Azure Mobile Client SDK</PackageTitle>
     <Title>Azure Mobile Client SDK</Title>
     <Authors>Microsoft, azure-sdk</Authors>
-    <Product>Loqu8.Azure.Mobile.Client (netstandard1.4)</Product>
+    <Product>Loqu8.Azure.Mobile.Client (netstandard1.3)</Product>
     <PackageLicenseUrl>http://go.microsoft.com/fwlink/?LinkId=286110</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Azure/azure-mobile-apps-net-client</PackageProjectUrl>
     <PackageIconUrl>http://go.microsoft.com/fwlink/?LinkID=288890</PackageIconUrl>
@@ -26,6 +25,8 @@
     <DebugType>full</DebugType>
     <RootNamespace>Microsoft.WindowsAzure.MobileServices</RootNamespace>
     <PackageId>Loqu8.Azure.Mobile.Client</PackageId>
+
+	<PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.3' ">portable-net45+win81</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>
     <!-- Need this to see the parent refs to Auth -->
@@ -40,36 +41,20 @@
 
 	<Compile Update="Resources.Designer.cs" DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />
 
-	<!--<Compile DesignTime="true" AutoGen="true" DependentUpon="Resources.resx" />-->
-
 	<EmbeddedResource Update="Resources.resx" Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />
 
-	<!--<EmbeddedResource Generator="ResXFileCodeGenerator" LastGenOutput="Resources.Designer.cs" />-->
-  </ItemGroup>
-  <PropertyGroup Label="Globals">
-    <ProjectGuid>04fc5444-1240-41d7-9aa8-648b9a465c9d</ProjectGuid>
-  </PropertyGroup>
+	</ItemGroup>
+	<PropertyGroup Label="Globals">
+		<ProjectGuid>04fc5444-1240-41d7-9aa8-648b9a465c9d</ProjectGuid>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0' ">
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="5.2.3" />
-    <PackageReference Include="System.Linq.Queryable" Version="4.0.1" />
-    <Compile Include="Platforms\uwp\**\*.cs" Exclude="Platforms\uwp\Extensions\MobileServiceCollectionViewExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' or '$(TargetFramework)' == 'netstandard1.1' ">
-    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="System.Net.Http" />
-    <Compile Include="Platforms\net45\**\*.cs" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.4' ">
-    <Compile Include="Platforms\netstandard1_4\**\*.cs" />
-  </ItemGroup>
-  <!--<Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />-->
+	<ItemGroup>
+	    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.0.0" PrivateAssets="All" />
+	    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+	    <PackageReference Include="PCLSpecialFolder" Version="1.1.0" />
+	    <PackageReference Include="PCLStorage" Version="1.0.2" />
+	    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
+		<PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+		<Compile Include="Platforms\netstandard1_3\**\*.cs" />
+	</ItemGroup>
 </Project>

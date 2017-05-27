@@ -9,10 +9,10 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Microsoft.WindowsAzure.MobileServices.Test.Unit.Extensions
-{
+{/*
     [TestClass]
     public class ExceptionExtensionsTests
     {
@@ -42,4 +42,5 @@ namespace Microsoft.WindowsAzure.MobileServices.Test.Unit.Extensions
             Assert.IsFalse(ExceptionExtensions.IsAuthenticationError(new MobileServiceInvalidOperationException(null, new HttpRequestMessage(), new HttpResponseMessage())));
         }
     }
+*/
 }

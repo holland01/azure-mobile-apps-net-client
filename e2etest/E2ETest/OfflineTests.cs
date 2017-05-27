@@ -746,7 +746,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Test
         private static List<string> GetAllTableNames(string dbName)
         {
             List<string> tableNames = new List<string>();
-            Batteries.Init();
+            Batteries_V2.Init();
             sqlite3 connection;
             int rc = raw.sqlite3_open(dbName, out connection);
             VerifySQLiteResponse(rc, raw.SQLITE_OK, connection);
@@ -788,7 +788,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Test
 
         private static void ExecuteNonQuery(string dbName, string sql)
         {
-            Batteries.Init();
+            Batteries_V2.Init();
             sqlite3 connection;
             int rc = raw.sqlite3_open(dbName, out connection);
             if (rc != raw.SQLITE_OK)

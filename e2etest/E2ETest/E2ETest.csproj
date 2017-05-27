@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;net45</TargetFrameworks>
-    <!-- Workaround until Xamarin supports PPDB -->
+    <TargetFramework>netstandard1.3</TargetFramework>
+	<PackageTargetFallback>portable-net45+win81</PackageTargetFallback>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Loqu8|net45|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Loqu8|netstandard1.3|AnyCPU'" />
   <ItemGroup Condition=" '$(Configuration)' == 'SdkRel' ">
     <PackageReference Include="Microsoft.Azure.Mobile.Client" Version="4.0.0-alpha-001" />
   </ItemGroup>
@@ -12,11 +12,12 @@
     <ProjectReference Include="..\..\src\Microsoft.Azure.Mobile.Client.SQLiteStore\Microsoft.Azure.Mobile.Client.SQLiteStore.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\E2ETestFramework\E2ETestFramework.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
-
 </Project>

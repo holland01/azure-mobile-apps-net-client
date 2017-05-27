@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;net45</TargetFrameworks>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <!-- Workaround until Xamarin supports PPDB -->
+	<PackageTargetFallback>portable-net45+win81</PackageTargetFallback>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Loqu8|net45|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Loqu8|netstandard1.3|AnyCPU'" />
   <ItemGroup Condition=" '$(Configuration)' == 'SdkRel' ">
     <PackageReference Include="Microsoft.Azure.Mobile.Client" Version="4.0.0-alpha-001" />
   </ItemGroup>

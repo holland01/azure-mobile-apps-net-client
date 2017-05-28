@@ -42,6 +42,7 @@ namespace Microsoft.WindowsAzure.MobileServices
                         throw new ArgumentNullException("ClientProvider cannot be null");
                     }
 
+                    PlatformInformation.ClientImplementation = ClientProvider;
                     current = new CurrentPlatform();
                 }
 

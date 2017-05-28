@@ -17,20 +17,10 @@ namespace Microsoft.WindowsAzure.MobileServices
     internal class PlatformInformation : IPlatformInformation
     {
         /// <summary>
-        /// The version string of the operating system, apparently for an HTTP user-agent string.
+        /// Required interface which provides information only attainable
+        /// using platform dependent APIs
         /// </summary>
-        public static string OSVersion { get; private set; }
-
-        /// <summary>
-        /// Windows net45 runtime reports this as "Win32NT"; apparently this is for an HTTP user-agent string.
-        /// That's all I can really provide.
-        /// </summary>
-        public static string OSPlatformArch { get; private set; }
-
-        /// <summary>
-        /// The name of the operating system.
-        /// </summary>
-        public static string OSName { get; private set; }
+        public static IPlatformQueryImpl ClientImplementation { get; set; }
 
         /// <summary>
         /// A singleton instance of the <see cref="ApplicationStorage"/>.
@@ -49,54 +39,13 @@ namespace Microsoft.WindowsAzure.MobileServices
         }
 
         /// <summary>
-        /// Matched OSPlatform result according to RuntimeInformation.IsOSPlatform(),
-        /// or a thrown exception if no match is found.
-        /// </summary>
-        public static OSPlatform PlatformOrdinal
-        {
-            get
-            {
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    return OSPlatform.Windows;
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    return OSPlatform.OSX;
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                {
-                    return OSPlatform.Linux;
-                }
-
-                throw new InvalidOperationException("Could not identify operating system; RuntimeInformation.IsOSPlatform() returned false for all 3 values");
-            }
-        }
-
-        static PlatformInformation()
-        {
-            string defaultName = PlatformOrdinal.ToString();
-
-            if (defaultName == "OSX")
-            {
-                defaultName = "MacOS";
-            }
-
-            string[] desc = RuntimeInformation.OSDescription.Split(' ');
-
-            OSVersion = desc[2];
-            OSPlatformArch = defaultName;
-            OSName = defaultName;
-        }
-
-        /// <summary>
         /// The architecture of the platform.
         /// </summary>
         public string OperatingSystemArchitecture
         {
             get
             {
-                return OSPlatformArch;
+                return ClientImplementation.GetOperatingSystemArchitecture();
             }
         }
 
@@ -107,7 +56,7 @@ namespace Microsoft.WindowsAzure.MobileServices
         {
             get
             {
-                return OSName;
+                return ClientImplementation.GetOperatingSystemName();
             }
         }
 
@@ -130,7 +79,7 @@ namespace Microsoft.WindowsAzure.MobileServices
                 );
                 */
 
-                return OSVersion;
+                return ClientImplementation.GetOperatingSystemVersion();
             }
         }
 

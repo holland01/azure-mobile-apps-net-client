@@ -14,13 +14,13 @@ namespace Microsoft.WindowsAzure.MobileServices
     /// Implements the <see cref="IPlatform"/> interface for the Windows
     /// Phone platform.
     /// </summary>
-    internal class PlatformInformation : IPlatformInformation
+    public class PlatformInformation : IPlatformInformation
     {
         /// <summary>
         /// Required interface which provides information only attainable
         /// using platform dependent APIs
         /// </summary>
-        public static IPlatformQueryImpl ClientImplementation { get; set; }
+        public static IPlatformQueryImpl OSInfoQuery { get; set; }
 
         /// <summary>
         /// A singleton instance of the <see cref="ApplicationStorage"/>.
@@ -45,7 +45,7 @@ namespace Microsoft.WindowsAzure.MobileServices
         {
             get
             {
-                return ClientImplementation.GetOperatingSystemArchitecture();
+                return OSInfoQuery.GetOperatingSystemArchitecture();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Microsoft.WindowsAzure.MobileServices
         {
             get
             {
-                return ClientImplementation.GetOperatingSystemName();
+                return OSInfoQuery.GetOperatingSystemName();
             }
         }
 
@@ -79,7 +79,7 @@ namespace Microsoft.WindowsAzure.MobileServices
                 );
                 */
 
-                return ClientImplementation.GetOperatingSystemVersion();
+                return OSInfoQuery.GetOperatingSystemVersion();
             }
         }
 

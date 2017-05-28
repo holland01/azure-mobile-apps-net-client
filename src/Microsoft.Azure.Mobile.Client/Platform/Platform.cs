@@ -17,8 +17,6 @@ namespace Microsoft.WindowsAzure.MobileServices
     /// </summary>
     internal static class Platform
     {
-        public static IPlatformQueryImpl ClientProvider { get; set; }
-
         /// <summary>
         /// The string value to use for the operating system name, arch, or version if
         /// the value is unknown.
@@ -37,12 +35,10 @@ namespace Microsoft.WindowsAzure.MobileServices
                 // create if not yet created
                 if (current == null)
                 {
-                    if (ClientProvider == null)
+                    if (PlatformInformation.OSInfoQuery == null)
                     {
-                        throw new ArgumentNullException("ClientProvider cannot be null");
+                        throw new ArgumentNullException("PlatformInformation.OSInfoQuery cannot be null");
                     }
-
-                    PlatformInformation.ClientImplementation = ClientProvider;
                     current = new CurrentPlatform();
                 }
 

@@ -14,7 +14,7 @@ namespace Microsoft.WindowsAzure.MobileServices
     /// <summary>
     /// Provides information about the platform it is running on.
     /// </summary>
-    internal interface IPlatformInformation
+    public interface IPlatformInformation
     {
         /// <summary>
         /// The architecture of the platform.
